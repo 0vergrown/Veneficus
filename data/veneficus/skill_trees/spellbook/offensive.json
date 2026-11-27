@@ -1,0 +1,14 @@
+{
+  "parent": "veneficus:spellbook/charms",
+  "name": {
+    "translate": "skill.veneficus.spellbook/offensive.name"
+  },
+  "description": {
+    "translate": "skill.veneficus.spellbook/offensive.description"
+  },
+  "icon": {
+    "texture": "veneficus:textures/gui/skill/offensive.png"
+  },
+  "frame": "goal",
+  "order": 2
+}

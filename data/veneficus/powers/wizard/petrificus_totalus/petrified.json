@@ -1,0 +1,232 @@
+{
+  "type": "apoli:multiple",
+  "bind": {
+    "type": "apoli:prevent_key_press",
+    "unpress": true
+  },
+  "stare": {
+    "type": "apoli:modify_cursor_speed",
+    "modifier": {
+      "operation": "set_total",
+      "value": 0
+    }
+  },
+  "rigid": {
+    "type": "apoli:modify_model_parts",
+    "override_pose": [
+      "crouching"
+    ],
+    "transformations": [
+      {
+        "model_part": "head",
+        "type": "pitch",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "head",
+        "type": "yaw",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "head",
+        "type": "roll",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "right_arm",
+        "type": "pitch",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "right_arm",
+        "type": "yaw",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "right_arm",
+        "type": "roll",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "left_arm",
+        "type": "pitch",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "left_arm",
+        "type": "yaw",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "left_arm",
+        "type": "roll",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "right_leg",
+        "type": "pitch",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "right_leg",
+        "type": "yaw",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "right_leg",
+        "type": "roll",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "left_leg",
+        "type": "pitch",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "left_leg",
+        "type": "yaw",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "left_leg",
+        "type": "roll",
+        "value": 0.0,
+        "override_animation": true,
+        "duration": 2,
+        "fade_out_duration": 4
+      },
+      {
+        "model_part": "whole",
+        "type": "pitch",
+        "fade_out_duration": 4,
+        "keyframes": [
+          {
+            "time": 0,
+            "value": 0
+          },
+          {
+            "time": 3,
+            "value": 0
+          },
+          {
+            "time": 10,
+            "value": -1.5708,
+            "easing": "ease_in_quad"
+          },
+          {
+            "time": 12,
+            "value": -1.47,
+            "easing": "ease_out_quad"
+          },
+          {
+            "time": 14,
+            "value": -1.5708,
+            "easing": "ease_in_quad"
+          }
+        ]
+      }
+    ]
+  },
+  "still": {
+    "type": "apoli:action_on_callback",
+    "entity_action_gained": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:entity_type",
+        "entity_type": "minecraft:player",
+        "inverted": true
+      },
+      "if_action": {
+        "type": "apoli:modify_entity_data",
+        "data": "no_ai",
+        "value": true
+      }
+    },
+    "entity_action_lost": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:entity_type",
+        "entity_type": "minecraft:player",
+        "inverted": true
+      },
+      "if_action": {
+        "type": "apoli:modify_entity_data",
+        "data": "no_ai",
+        "value": false
+      }
+    }
+  },
+  "frost": {
+    "type": "apoli:particle",
+    "particle": {
+      "type": "apoli:custom",
+      "texture": "veneficus:textures/particle/glint.png",
+      "lifetime": 12,
+      "lifetime_variation": 6,
+      "size": 0.1,
+      "size_variation": 0.06,
+      "end_size": 0.0,
+      "color": "#FFFFFF",
+      "end_color": "#7CC4FF00",
+      "friction": 0.9,
+      "frames": 4,
+      "frame_layout": "horizontal",
+      "emissive": true,
+      "blend": "additive",
+      "physics": false,
+      "alpha_bleed": true,
+      "roll": "rUni(0, 360)"
+    },
+    "count": 1,
+    "frequency": 6,
+    "offset_y": 0.9,
+    "spread": {
+      "x": 0.4,
+      "y": 0.8,
+      "z": 0.4
+    }
+  },
+  "hidden": true
+}

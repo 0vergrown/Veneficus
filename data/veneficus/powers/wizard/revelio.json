@@ -1,0 +1,788 @@
+{
+  "type": "apoli:multiple",
+  "skill": {
+    "parent": "veneficus:spellbook/utility",
+    "icon": {
+      "texture": "veneficus:textures/gui/wizard/revelio.png"
+    },
+    "cost": 1,
+    "frame": "task",
+    "order": 2,
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "veneficus:wizard/spellbook_loadout",
+      "comparison": "==",
+      "compare_to": 0
+    }
+  },
+  "cast": {
+    "type": "apoli:function",
+    "entity_action": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:resource",
+        "resource": "veneficus:wizard/spellbook_ready",
+        "comparison": "<=",
+        "compare_to": "world_time",
+        "position": 4
+      },
+      "if_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:modify_resource",
+            "resource": "veneficus:wizard/spellbook_ready",
+            "modifier": {
+              "operation": "set_base",
+              "value": "world_time + 300"
+            },
+            "position": 4
+          },
+          {
+            "type": "apoli:modify_resource",
+            "resource": "veneficus:wizard/spellbook_recharge",
+            "modifier": {
+              "operation": "set_base",
+              "value": 300
+            },
+            "position": 4
+          },
+          {
+            "type": "apoli:trigger_cooldown",
+            "power": "veneficus:wizard/spellbook_flourish"
+          },
+          {
+            "type": "apoli:swing_hand",
+            "hand": "main_hand"
+          },
+          {
+            "type": "apoli:text",
+            "bar": "actionbar",
+            "text": {
+              "translate": "veneficus.cast.revelio",
+              "color": "#6AD8FF"
+            },
+            "fadein": 2,
+            "duration": 30,
+            "fadeout": 10
+          },
+          {
+            "type": "apoli:play_sound",
+            "sound": "minecraft:block.beacon.activate",
+            "volume": 0.5,
+            "pitch": 1.9
+          },
+          {
+            "type": "apoli:spawn_particles",
+            "particle": {
+              "type": "apoli:custom",
+              "texture": "veneficus:textures/particle/burst.png",
+              "lifetime": 4,
+              "size": 0.22,
+              "end_size": 0.35200000000000004,
+              "color": "#FFFFFF",
+              "end_color": "#6AD8FF00",
+              "frames": 4,
+              "frame_layout": "horizontal",
+              "emissive": true,
+              "blend": "additive",
+              "physics": false,
+              "alpha_bleed": true,
+              "easing": "ease_out_quad",
+              "roll": "rUni(0, 360)"
+            },
+            "count": 1,
+            "space": "world",
+            "offset_x": "(-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)",
+            "offset_y": "(eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)",
+            "offset_z": "(-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)",
+            "spread": 0.0,
+            "speed": 0.0
+          },
+          {
+            "type": "apoli:trigger_cooldown",
+            "power": "veneficus:wizard/revelio_sight"
+          },
+          {
+            "type": "apoli:spawn_particles",
+            "particle": {
+              "type": "apoli:custom",
+              "texture": "veneficus:textures/particle/ring.png",
+              "lifetime": 16,
+              "size": 0.6,
+              "end_size": 34.0,
+              "color": "#6AD8FFE0",
+              "end_color": "#6AD8FF00",
+              "facing": "horizontal",
+              "emissive": true,
+              "blend": "additive",
+              "physics": false,
+              "alpha_bleed": true,
+              "easing": "ease_out_quad"
+            },
+            "count": 1,
+            "offset_y": 0.15,
+            "spread": 0.0
+          },
+          {
+            "type": "apoli:spawn_particles",
+            "particle": {
+              "type": "apoli:custom",
+              "texture": "veneficus:textures/particle/ring.png",
+              "lifetime": 12,
+              "size": 0.4,
+              "end_size": 22.0,
+              "color": "#FFFFFFE0",
+              "end_color": "#FFFFFF00",
+              "facing": "horizontal",
+              "emissive": true,
+              "blend": "additive",
+              "physics": false,
+              "alpha_bleed": true,
+              "easing": "ease_out_quad"
+            },
+            "count": 1,
+            "offset_y": 1.0,
+            "spread": 0.0
+          },
+          {
+            "type": "apoli:spawn_particles",
+            "particle": {
+              "type": "apoli:custom",
+              "texture": "veneficus:textures/particle/glint.png",
+              "lifetime": 12,
+              "lifetime_variation": 6,
+              "size": 0.12,
+              "size_variation": 0.06,
+              "end_size": 0.0,
+              "color": "#FFFFFF",
+              "end_color": "#6AD8FF00",
+              "friction": 0.9,
+              "frames": 4,
+              "frame_layout": "horizontal",
+              "emissive": true,
+              "blend": "additive",
+              "physics": false,
+              "alpha_bleed": true,
+              "roll": "rUni(0, 360)"
+            },
+            "count": 24,
+            "offset_y": 1.0,
+            "spread": {
+              "x": 3.0,
+              "y": 1.2,
+              "z": 3.0
+            },
+            "speed": 0.02
+          },
+          {
+            "type": "apoli:play_sound",
+            "sound": "minecraft:block.beacon.activate",
+            "volume": 0.7,
+            "pitch": 1.9
+          },
+          {
+            "type": "apoli:play_sound",
+            "sound": "minecraft:block.amethyst_cluster.break",
+            "volume": 1.0,
+            "pitch": 1.4
+          },
+          {
+            "type": "apoli:area_of_effect",
+            "radius": 16,
+            "shape": "sphere",
+            "bientity_condition": {
+              "type": "apoli:target_condition",
+              "condition": {
+                "type": "apoli:disguised"
+              }
+            },
+            "bientity_action": {
+              "type": "apoli:target_action",
+              "action": {
+                "type": "apoli:and",
+                "actions": [
+                  {
+                    "type": "apoli:remove_disguise"
+                  },
+                  {
+                    "type": "apoli:spawn_particles",
+                    "particle": {
+                      "type": "apoli:custom",
+                      "texture": "veneficus:textures/particle/burst.png",
+                      "lifetime": 7,
+                      "size": 1.0,
+                      "end_size": 1.6,
+                      "color": "#FFFFFF",
+                      "end_color": "#6AD8FF00",
+                      "frames": 4,
+                      "frame_layout": "horizontal",
+                      "emissive": true,
+                      "blend": "additive",
+                      "physics": false,
+                      "alpha_bleed": true,
+                      "easing": "ease_out_quad",
+                      "roll": "rUni(0, 360)"
+                    },
+                    "count": 1,
+                    "spread": 0.0,
+                    "offset_y": "(eye_y - y) * 0.75",
+                    "bientity_condition": {
+                      "type": "apoli:any_of",
+                      "conditions": [
+                        {
+                          "type": "apoli:equal",
+                          "inverted": true
+                        },
+                        {
+                          "type": "apoli:target_condition",
+                          "condition": {
+                            "type": "apoli:perspective",
+                            "perspective": "third_person"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "else_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:text",
+            "bar": "actionbar",
+            "text": {
+              "translate": "veneficus.hud.recharging",
+              "with": [
+                {
+                  "translate": "power.veneficus.wizard/revelio.name",
+                  "color": "#B8B0A0"
+                }
+              ],
+              "color": "gray"
+            },
+            "fadein": 2,
+            "duration": 30,
+            "fadeout": 10
+          },
+          {
+            "type": "apoli:play_sound",
+            "sound": "minecraft:block.note_block.hat",
+            "volume": 0.3,
+            "pitch": 0.7
+          }
+        ]
+      }
+    }
+  },
+  "bind": {
+    "type": "apoli:action_on_callback",
+    "entity_action_gained": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:all_of",
+        "conditions": [
+          {
+            "type": "apoli:resource",
+            "resource": "veneficus:wizard/spellbook_loadout",
+            "comparison": "==",
+            "compare_to": 4,
+            "inverted": true
+          },
+          {
+            "type": "apoli:resource",
+            "resource": "veneficus:wizard/spellbook_loadout",
+            "comparison": "==",
+            "compare_to": 0
+          }
+        ]
+      },
+      "if_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:modify_resource",
+            "resource": "veneficus:wizard/spellbook_loadout",
+            "modifier": {
+              "operation": "set_base",
+              "value": 4
+            },
+            "position": "resource_index_of(veneficus:wizard/spellbook_loadout, 0)"
+          },
+          {
+            "type": "apoli:text",
+            "bar": "actionbar",
+            "fadein": 4,
+            "duration": 60,
+            "fadeout": 15,
+            "text": [
+              {
+                "text": {
+                  "translate": "veneficus.hud.learned",
+                  "with": [
+                    {
+                      "translate": "power.veneficus.wizard/revelio.name",
+                      "color": "#6AD8FF"
+                    }
+                  ],
+                  "color": "#E8DCC0"
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 4,
+                  "position": 0
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 4,
+                  "position": 1
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 4,
+                  "position": 2
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 4,
+                  "position": 3
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 4,
+                  "position": 4
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 4,
+                  "position": 5
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 4,
+                  "position": 6
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 4,
+                  "position": 7
+                }
+              }
+            ]
+          },
+          {
+            "type": "apoli:play_sound",
+            "sound": "minecraft:block.enchantment_table.use",
+            "volume": 0.8,
+            "pitch": 1.2
+          }
+        ]
+      }
+    },
+    "entity_action_lost": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:resource",
+        "resource": "veneficus:wizard/spellbook_loadout",
+        "comparison": "==",
+        "compare_to": 4
+      },
+      "if_action": {
+        "type": "apoli:modify_resource",
+        "resource": "veneficus:wizard/spellbook_loadout",
+        "modifier": {
+          "operation": "set_base",
+          "value": 0
+        },
+        "position": "resource_index_of(veneficus:wizard/spellbook_loadout, 4)"
+      }
+    }
+  },
+  "incantation": {
+    "type": "apoli:action_on_speech",
+    "messages": [
+      "revelio",
+      "reveal io",
+      "revel io",
+      "revelo"
+    ],
+    "tolerance": 0.25,
+    "condition": {
+      "type": "apoli:power",
+      "power": "veneficus:wand/focus"
+    },
+    "entity_action": {
+      "type": "apoli:run_function",
+      "function": "veneficus:wizard/revelio_cast"
+    }
+  },
+  "sight": {
+    "type": "apoli:cooldown",
+    "cooldown": 200,
+    "persistent": false
+  },
+  "players": {
+    "type": "apoli:entity_glow",
+    "bientity_condition": {
+      "type": "apoli:all_of",
+      "conditions": [
+        {
+          "type": "apoli:equal",
+          "inverted": true
+        },
+        {
+          "type": "apoli:target_condition",
+          "condition": {
+            "type": "apoli:living"
+          }
+        },
+        {
+          "type": "apoli:target_condition",
+          "condition": {
+            "type": "apoli:entity_type",
+            "entity_type": "minecraft:player"
+          }
+        }
+      ]
+    },
+    "use_teams": false,
+    "red": 1.0,
+    "green": 0.84,
+    "blue": 0.35,
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "veneficus:wizard/revelio_sight",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "creatures": {
+    "type": "apoli:entity_glow",
+    "bientity_condition": {
+      "type": "apoli:all_of",
+      "conditions": [
+        {
+          "type": "apoli:equal",
+          "inverted": true
+        },
+        {
+          "type": "apoli:target_condition",
+          "condition": {
+            "type": "apoli:living"
+          }
+        },
+        {
+          "type": "apoli:target_condition",
+          "condition": {
+            "type": "apoli:entity_type",
+            "entity_type": "minecraft:player",
+            "inverted": true
+          }
+        }
+      ]
+    },
+    "use_teams": false,
+    "red": 0.45,
+    "green": 0.9,
+    "blue": 1.0,
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "veneficus:wizard/revelio_sight",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "ores_precious": {
+    "type": "apoli:block_glow",
+    "distance": 16,
+    "mode": "outline",
+    "red": 0.35,
+    "green": 1.0,
+    "blue": 1.0,
+    "block_condition": {
+      "type": "apoli:in_tag",
+      "tag": "veneficus:wizard/revelio/precious"
+    },
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "veneficus:wizard/revelio_sight",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "ores_metal": {
+    "type": "apoli:block_glow",
+    "distance": 16,
+    "mode": "outline",
+    "red": 1.0,
+    "green": 0.78,
+    "blue": 0.3,
+    "block_condition": {
+      "type": "apoli:in_tag",
+      "tag": "veneficus:wizard/revelio/metal"
+    },
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "veneficus:wizard/revelio_sight",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "ores_mineral": {
+    "type": "apoli:block_glow",
+    "distance": 16,
+    "mode": "outline",
+    "red": 1.0,
+    "green": 0.3,
+    "blue": 0.75,
+    "block_condition": {
+      "type": "apoli:in_tag",
+      "tag": "veneficus:wizard/revelio/mineral"
+    },
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "veneficus:wizard/revelio_sight",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "ores_coal": {
+    "type": "apoli:block_glow",
+    "distance": 16,
+    "mode": "outline",
+    "red": 0.55,
+    "green": 0.55,
+    "blue": 0.6,
+    "block_condition": {
+      "type": "apoli:in_tag",
+      "tag": "veneficus:wizard/revelio/coal"
+    },
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "veneficus:wizard/revelio_sight",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  }
+}

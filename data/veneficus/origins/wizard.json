@@ -1,0 +1,194 @@
+{
+  "icon": {
+    "texture": "veneficus:textures/gui/wizard/icon.png"
+  },
+  "impact": 2,
+  "order": 15,
+  "powers": [
+    "veneficus:wizard/spellcasting",
+    "veneficus:wizard/spell_studies",
+    "veneficus:wizard/wandlore",
+    "veneficus:wizard/incantations",
+    "veneficus:wizard/spellbook",
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/basic_cast"
+      },
+      "powers": [
+        "veneficus:wizard/basic_cast/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/lumos"
+      },
+      "powers": [
+        "veneficus:wizard/lumos/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/alohomora"
+      },
+      "powers": [
+        "veneficus:wizard/alohomora/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/revelio"
+      },
+      "powers": [
+        "veneficus:wizard/revelio/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/accio"
+      },
+      "powers": [
+        "veneficus:wizard/accio/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/wingardium_leviosa"
+      },
+      "powers": [
+        "veneficus:wizard/wingardium_leviosa/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/protego"
+      },
+      "powers": [
+        "veneficus:wizard/protego/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/finite_incantatem"
+      },
+      "powers": [
+        "veneficus:wizard/finite_incantatem/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/expelliarmus"
+      },
+      "powers": [
+        "veneficus:wizard/expelliarmus/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/stupefy"
+      },
+      "powers": [
+        "veneficus:wizard/stupefy/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/arresto_momentum"
+      },
+      "powers": [
+        "veneficus:wizard/arresto_momentum/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/depulso"
+      },
+      "powers": [
+        "veneficus:wizard/depulso/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/incendio"
+      },
+      "powers": [
+        "veneficus:wizard/incendio/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/bombarda"
+      },
+      "powers": [
+        "veneficus:wizard/bombarda/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/altering_spell"
+      },
+      "powers": [
+        "veneficus:wizard/altering_spell/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/flipendo"
+      },
+      "powers": [
+        "veneficus:wizard/flipendo/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/petrificus_totalus"
+      },
+      "powers": [
+        "veneficus:wizard/petrificus_totalus/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/confringo"
+      },
+      "powers": [
+        "veneficus:wizard/confringo/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/crucio"
+      },
+      "powers": [
+        "veneficus:wizard/crucio/info"
+      ]
+    },
+    {
+      "condition": {
+        "type": "apoli:power",
+        "power": "veneficus:wizard/avada_kedavra"
+      },
+      "powers": [
+        "veneficus:wizard/avada_kedavra/info"
+      ]
+    }
+  ]
+}

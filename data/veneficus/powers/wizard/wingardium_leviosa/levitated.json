@@ -1,0 +1,89 @@
+{
+  "type": "apoli:multiple",
+  "float": {
+    "type": "apoli:modify_falling",
+    "velocity": 0,
+    "take_fall_damage": false
+  },
+  "drift": {
+    "type": "apoli:modify_velocity",
+    "axes": [
+      "x",
+      "z"
+    ],
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "value": -0.35
+    }
+  },
+  "settle": {
+    "type": "apoli:modify_velocity",
+    "axes": [
+      "y"
+    ],
+    "modifier": {
+      "operation": "multiply_total_multiplicative",
+      "value": -0.12
+    }
+  },
+  "sparkle": {
+    "type": "apoli:particle",
+    "particle": {
+      "type": "apoli:custom",
+      "texture": "veneficus:textures/particle/glint.png",
+      "lifetime": 12,
+      "lifetime_variation": 6,
+      "size": 0.1,
+      "size_variation": 0.06,
+      "end_size": 0.0,
+      "color": "#FFFFFF",
+      "end_color": "#8CCBFF00",
+      "friction": 0.9,
+      "frames": 4,
+      "frame_layout": "horizontal",
+      "emissive": true,
+      "blend": "additive",
+      "physics": false,
+      "alpha_bleed": true,
+      "roll": "rUni(0, 360)"
+    },
+    "count": 1,
+    "frequency": 3,
+    "offset_y": 0.6,
+    "spread": {
+      "x": 0.5,
+      "y": 0.7,
+      "z": 0.5
+    }
+  },
+  "dangle": {
+    "type": "apoli:modify_model_parts",
+    "transformations": [
+      {
+        "model_part": "right_arm",
+        "type": "roll",
+        "value": 0.45,
+        "duration": 6,
+        "easing": "ease_out_quad"
+      },
+      {
+        "model_part": "left_arm",
+        "type": "roll",
+        "value": -0.45,
+        "duration": 6,
+        "easing": "ease_out_quad"
+      },
+      {
+        "model_part": "right_leg",
+        "type": "pitch",
+        "value": "0.18 * sin(world_time * 0.21)"
+      },
+      {
+        "model_part": "left_leg",
+        "type": "pitch",
+        "value": "-0.18 * sin(world_time * 0.21)"
+      }
+    ]
+  },
+  "hidden": true
+}

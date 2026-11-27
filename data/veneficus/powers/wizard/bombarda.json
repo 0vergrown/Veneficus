@@ -1,0 +1,988 @@
+{
+  "type": "apoli:multiple",
+  "skill": {
+    "parent": "veneficus:spellbook/offensive",
+    "icon": {
+      "texture": "veneficus:textures/gui/wizard/bombarda.png"
+    },
+    "cost": 2,
+    "frame": "task",
+    "order": 3,
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "veneficus:wizard/spellbook_loadout",
+      "comparison": "==",
+      "compare_to": 0
+    }
+  },
+  "cast": {
+    "type": "apoli:function",
+    "entity_action": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:resource",
+        "resource": "veneficus:wizard/spellbook_ready",
+        "comparison": "<=",
+        "compare_to": "world_time",
+        "position": 14
+      },
+      "if_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:modify_resource",
+            "resource": "veneficus:wizard/spellbook_ready",
+            "modifier": {
+              "operation": "set_base",
+              "value": "world_time + 160"
+            },
+            "position": 14
+          },
+          {
+            "type": "apoli:modify_resource",
+            "resource": "veneficus:wizard/spellbook_recharge",
+            "modifier": {
+              "operation": "set_base",
+              "value": 160
+            },
+            "position": 14
+          },
+          {
+            "type": "apoli:trigger_cooldown",
+            "power": "veneficus:wizard/spellbook_flourish"
+          },
+          {
+            "type": "apoli:swing_hand",
+            "hand": "main_hand"
+          },
+          {
+            "type": "apoli:text",
+            "bar": "actionbar",
+            "text": {
+              "translate": "veneficus.cast.bombarda",
+              "color": "#FFB43A"
+            },
+            "fadein": 2,
+            "duration": 30,
+            "fadeout": 10
+          },
+          {
+            "type": "apoli:play_sound",
+            "sound": "minecraft:entity.firework_rocket.launch",
+            "volume": 0.8,
+            "pitch": 0.9
+          },
+          {
+            "type": "apoli:spawn_particles",
+            "particle": {
+              "type": "apoli:custom",
+              "texture": "veneficus:textures/particle/burst.png",
+              "lifetime": 4,
+              "size": 0.22,
+              "end_size": 0.35200000000000004,
+              "color": "#FFFFFF",
+              "end_color": "#FFB43A00",
+              "frames": 4,
+              "frame_layout": "horizontal",
+              "emissive": true,
+              "blend": "additive",
+              "physics": false,
+              "alpha_bleed": true,
+              "easing": "ease_out_quad",
+              "roll": "rUni(0, 360)"
+            },
+            "count": 1,
+            "space": "world",
+            "offset_x": "(-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)",
+            "offset_y": "(eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)",
+            "offset_z": "(-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)",
+            "spread": 0.0,
+            "speed": 0.0
+          },
+          {
+            "type": "apoli:raycast",
+            "distance": 32,
+            "block": true,
+            "entity": true,
+            "shape_type": "collider",
+            "fluid_handling": "none",
+            "radius": 0.3,
+            "bientity_condition": {
+              "type": "apoli:all_of",
+              "conditions": [
+                {
+                  "type": "apoli:equal",
+                  "inverted": true
+                },
+                {
+                  "type": "apoli:target_condition",
+                  "condition": {
+                    "type": "apoli:living"
+                  }
+                }
+              ]
+            },
+            "bientity_action": {
+              "type": "apoli:delay",
+              "ticks": "max(1, ceil(distance / 3.0))",
+              "action": {
+                "type": "apoli:target_action",
+                "action": {
+                  "type": "apoli:and",
+                  "actions": [
+                    {
+                      "type": "apoli:spawn_particles",
+                      "particle": {
+                        "type": "apoli:custom",
+                        "texture": "veneficus:textures/particle/burst.png",
+                        "lifetime": 7,
+                        "size": 0.7,
+                        "end_size": 1.1199999999999999,
+                        "color": "#FFFFFF",
+                        "end_color": "#FFB43A00",
+                        "frames": 4,
+                        "frame_layout": "horizontal",
+                        "emissive": true,
+                        "blend": "additive",
+                        "physics": false,
+                        "alpha_bleed": true,
+                        "easing": "ease_out_quad",
+                        "roll": "rUni(0, 360)"
+                      },
+                      "count": 1,
+                      "spread": 0.05,
+                      "speed": 0.0,
+                      "offset_y": "(eye_y - y) * 0.75",
+                      "bientity_condition": {
+                        "type": "apoli:any_of",
+                        "conditions": [
+                          {
+                            "type": "apoli:equal",
+                            "inverted": true
+                          },
+                          {
+                            "type": "apoli:target_condition",
+                            "condition": {
+                              "type": "apoli:perspective",
+                              "perspective": "third_person"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "apoli:spawn_particles",
+                      "particle": {
+                        "type": "apoli:custom",
+                        "texture": "veneficus:textures/particle/spark.png",
+                        "lifetime": 10,
+                        "lifetime_variation": 6,
+                        "size": 0.05,
+                        "size_variation": 0.03,
+                        "end_size": 0.0,
+                        "color": "#FFFFFF",
+                        "end_color": "#FFB43A00",
+                        "gravity": 0.02,
+                        "friction": 0.86,
+                        "frames": 4,
+                        "frame_layout": "horizontal",
+                        "emissive": true,
+                        "blend": "additive",
+                        "physics": false,
+                        "alpha_bleed": true,
+                        "color_variation": 0.04
+                      },
+                      "count": 14,
+                      "spread": {
+                        "x": 0.2,
+                        "y": 0.3,
+                        "z": 0.2
+                      },
+                      "speed": 0.22,
+                      "offset_y": "(eye_y - y) * 0.75",
+                      "bientity_condition": {
+                        "type": "apoli:any_of",
+                        "conditions": [
+                          {
+                            "type": "apoli:equal",
+                            "inverted": true
+                          },
+                          {
+                            "type": "apoli:target_condition",
+                            "condition": {
+                              "type": "apoli:perspective",
+                              "perspective": "third_person"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "block_action": {
+              "type": "apoli:delay",
+              "ticks": "max(1, ceil(distance / 3.0))",
+              "action": {
+                "type": "apoli:and",
+                "actions": [
+                  {
+                    "type": "apoli:spawn_particles",
+                    "particle": {
+                      "type": "apoli:custom",
+                      "texture": "veneficus:textures/particle/burst.png",
+                      "lifetime": 7,
+                      "size": 0.6,
+                      "end_size": 0.96,
+                      "color": "#FFFFFF",
+                      "end_color": "#FFB43A00",
+                      "frames": 4,
+                      "frame_layout": "horizontal",
+                      "emissive": true,
+                      "blend": "additive",
+                      "physics": false,
+                      "alpha_bleed": true,
+                      "easing": "ease_out_quad",
+                      "roll": "rUni(0, 360)"
+                    },
+                    "count": 1,
+                    "spread": 0.02,
+                    "anchor": "hit"
+                  },
+                  {
+                    "type": "apoli:spawn_particles",
+                    "particle": {
+                      "type": "apoli:custom",
+                      "texture": "veneficus:textures/particle/spark.png",
+                      "lifetime": 10,
+                      "lifetime_variation": 6,
+                      "size": 0.05,
+                      "size_variation": 0.03,
+                      "end_size": 0.0,
+                      "color": "#FFFFFF",
+                      "end_color": "#FFB43A00",
+                      "gravity": 0.02,
+                      "friction": 0.86,
+                      "frames": 4,
+                      "frame_layout": "horizontal",
+                      "emissive": true,
+                      "blend": "additive",
+                      "physics": false,
+                      "alpha_bleed": true,
+                      "color_variation": 0.04
+                    },
+                    "count": 12,
+                    "spread": 0.15,
+                    "speed": 0.18,
+                    "anchor": "hit"
+                  }
+                ]
+              }
+            },
+            "hit_action": {
+              "type": "apoli:and",
+              "actions": [
+                {
+                  "type": "apoli:spawn_particles",
+                  "particle": {
+                    "type": "apoli:custom",
+                    "texture": "veneficus:textures/particle/bolt_glow.png",
+                    "lifetime": "max(1, ceil(distance / 3.0))",
+                    "size": 0.24,
+                    "stretch": 4.0,
+                    "facing": "velocity",
+                    "frames": 4,
+                    "frame_layout": "horizontal",
+                    "frame_time": 1,
+                    "loop_frames": true,
+                    "color": "#FFB43A",
+                    "end_color": "#FFB43A",
+                    "friction": 1.0,
+                    "emissive": true,
+                    "blend": "additive",
+                    "physics": false,
+                    "alpha_bleed": true
+                  },
+                  "count": 1,
+                  "space": "world",
+                  "offset_x": "(-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)",
+                  "offset_y": "(eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)",
+                  "offset_z": "(-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)",
+                  "spread": 0.0,
+                  "velocity_x": "(hit_x - x - (-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)) / max(1, ceil(distance / 3.0))",
+                  "velocity_y": "(hit_y - y - (eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)) / max(1, ceil(distance / 3.0))",
+                  "velocity_z": "(hit_z - z - (-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)) / max(1, ceil(distance / 3.0))"
+                },
+                {
+                  "type": "apoli:spawn_particles",
+                  "particle": {
+                    "type": "apoli:custom",
+                    "texture": "veneficus:textures/particle/bolt_core.png",
+                    "lifetime": "max(1, ceil(distance / 3.0))",
+                    "size": 0.07,
+                    "stretch": 8.0,
+                    "facing": "velocity",
+                    "frames": 4,
+                    "frame_layout": "horizontal",
+                    "frame_time": 1,
+                    "loop_frames": true,
+                    "color": "#FFF6E2",
+                    "end_color": "#FFF6E2",
+                    "friction": 1.0,
+                    "emissive": true,
+                    "blend": "additive",
+                    "physics": false,
+                    "alpha_bleed": true
+                  },
+                  "count": 1,
+                  "space": "world",
+                  "offset_x": "(-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)",
+                  "offset_y": "(eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)",
+                  "offset_z": "(-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)",
+                  "spread": 0.0,
+                  "velocity_x": "(hit_x - x - (-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)) / max(1, ceil(distance / 3.0))",
+                  "velocity_y": "(hit_y - y - (eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)) / max(1, ceil(distance / 3.0))",
+                  "velocity_z": "(hit_z - z - (-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)) / max(1, ceil(distance / 3.0))"
+                },
+                {
+                  "type": "apoli:spawn_particles",
+                  "particle": {
+                    "type": "apoli:custom",
+                    "texture": "veneficus:textures/particle/bolt_glow.png",
+                    "lifetime": "max(1, ceil(distance / 3.0)) + 3",
+                    "size": 0.16,
+                    "end_size": 0.02,
+                    "stretch": 7.0,
+                    "facing": "velocity",
+                    "frames": 4,
+                    "frame_layout": "horizontal",
+                    "frame_time": 1,
+                    "loop_frames": true,
+                    "color": "#FFB43A",
+                    "end_color": "#FFB43A00",
+                    "friction": 0.86,
+                    "emissive": true,
+                    "blend": "additive",
+                    "physics": false,
+                    "alpha_bleed": true,
+                    "easing": "ease_in_quad"
+                  },
+                  "count": 1,
+                  "space": "world",
+                  "offset_x": "(-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)",
+                  "offset_y": "(eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)",
+                  "offset_z": "(-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)",
+                  "spread": 0.0,
+                  "velocity_x": "(hit_x - x - (-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)) / max(1, ceil(distance / 3.0))",
+                  "velocity_y": "(hit_y - y - (eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)) / max(1, ceil(distance / 3.0))",
+                  "velocity_z": "(hit_z - z - (-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)) / max(1, ceil(distance / 3.0))"
+                },
+                {
+                  "type": "apoli:modify_resource",
+                  "resource": "veneficus:wizard/spellbook_impact",
+                  "modifier": {
+                    "operation": "set_base",
+                    "value": "hit_x - 0.45 * look_x"
+                  },
+                  "position": 0
+                },
+                {
+                  "type": "apoli:modify_resource",
+                  "resource": "veneficus:wizard/spellbook_impact",
+                  "modifier": {
+                    "operation": "set_base",
+                    "value": "hit_y - 0.45 * look_y"
+                  },
+                  "position": 1
+                },
+                {
+                  "type": "apoli:modify_resource",
+                  "resource": "veneficus:wizard/spellbook_impact",
+                  "modifier": {
+                    "operation": "set_base",
+                    "value": "hit_z - 0.45 * look_z"
+                  },
+                  "position": 2
+                },
+                {
+                  "type": "apoli:delay",
+                  "ticks": "max(1, ceil(distance / 3.0))",
+                  "action": {
+                    "type": "apoli:and",
+                    "actions": [
+                      {
+                        "type": "apoli:summon_minion",
+                        "max_life_ticks": 3,
+                        "invulnerable": true,
+                        "scale": 0.05,
+                        "bientity_action": {
+                          "type": "apoli:and",
+                          "actions": [
+                            {
+                              "type": "apoli:target_action",
+                              "action": {
+                                "type": "apoli:modify_entity_data",
+                                "data": "invisible",
+                                "value": true
+                              }
+                            },
+                            {
+                              "type": "apoli:target_action",
+                              "action": {
+                                "type": "apoli:modify_entity_data",
+                                "data": "silent",
+                                "value": true
+                              }
+                            },
+                            {
+                              "type": "apoli:target_action",
+                              "action": {
+                                "type": "apoli:teleport",
+                                "relative": false,
+                                "x": "actor_resource(veneficus:wizard/spellbook_impact, 0)",
+                                "y": "actor_resource(veneficus:wizard/spellbook_impact, 1)",
+                                "z": "actor_resource(veneficus:wizard/spellbook_impact, 2)",
+                                "loaded_chunks_only": true
+                              }
+                            },
+                            {
+                              "type": "apoli:explode",
+                              "power": 2.4,
+                              "destruction_type": "break",
+                              "create_fire": false,
+                              "at_target": true,
+                              "damage_self": false
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "apoli:area_of_effect",
+                        "radius": 40,
+                        "shape": "sphere",
+                        "include_actor": true,
+                        "bientity_condition": {
+                          "type": "apoli:target_condition",
+                          "condition": {
+                            "type": "apoli:entity_type",
+                            "entity_type": "minecraft:player"
+                          }
+                        },
+                        "bientity_action": {
+                          "type": "apoli:if_else",
+                          "condition": {
+                            "type": "apoli:random_chance",
+                            "chance": "if(distance(target_pos, vec(actor_resource(veneficus:wizard/spellbook_impact, 0), actor_resource(veneficus:wizard/spellbook_impact, 1), actor_resource(veneficus:wizard/spellbook_impact, 2))) <= 8, 1, 0)"
+                          },
+                          "if_action": {
+                            "type": "apoli:target_action",
+                            "action": {
+                              "type": "apoli:apply_effect",
+                              "effect": {
+                                "effect": "veneficus:wizard/dazzled",
+                                "duration": 30,
+                                "amplifier": 0,
+                                "show_particles": false,
+                                "show_icon": false
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "miss_action": {
+              "type": "apoli:and",
+              "actions": [
+                {
+                  "type": "apoli:spawn_particles",
+                  "particle": {
+                    "type": "apoli:custom",
+                    "texture": "veneficus:textures/particle/bolt_glow.png",
+                    "lifetime": "max(1, ceil(distance / 3.0))",
+                    "size": 0.24,
+                    "stretch": 4.0,
+                    "facing": "velocity",
+                    "frames": 4,
+                    "frame_layout": "horizontal",
+                    "frame_time": 1,
+                    "loop_frames": true,
+                    "color": "#FFB43A",
+                    "end_color": "#FFB43A",
+                    "friction": 1.0,
+                    "emissive": true,
+                    "blend": "additive",
+                    "physics": false,
+                    "alpha_bleed": true
+                  },
+                  "count": 1,
+                  "space": "world",
+                  "offset_x": "(-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)",
+                  "offset_y": "(eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)",
+                  "offset_z": "(-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)",
+                  "spread": 0.0,
+                  "velocity_x": "(hit_x - x - (-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)) / max(1, ceil(distance / 3.0))",
+                  "velocity_y": "(hit_y - y - (eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)) / max(1, ceil(distance / 3.0))",
+                  "velocity_z": "(hit_z - z - (-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)) / max(1, ceil(distance / 3.0))"
+                },
+                {
+                  "type": "apoli:spawn_particles",
+                  "particle": {
+                    "type": "apoli:custom",
+                    "texture": "veneficus:textures/particle/bolt_core.png",
+                    "lifetime": "max(1, ceil(distance / 3.0))",
+                    "size": 0.07,
+                    "stretch": 8.0,
+                    "facing": "velocity",
+                    "frames": 4,
+                    "frame_layout": "horizontal",
+                    "frame_time": 1,
+                    "loop_frames": true,
+                    "color": "#FFF6E2",
+                    "end_color": "#FFF6E2",
+                    "friction": 1.0,
+                    "emissive": true,
+                    "blend": "additive",
+                    "physics": false,
+                    "alpha_bleed": true
+                  },
+                  "count": 1,
+                  "space": "world",
+                  "offset_x": "(-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)",
+                  "offset_y": "(eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)",
+                  "offset_z": "(-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)",
+                  "spread": 0.0,
+                  "velocity_x": "(hit_x - x - (-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)) / max(1, ceil(distance / 3.0))",
+                  "velocity_y": "(hit_y - y - (eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)) / max(1, ceil(distance / 3.0))",
+                  "velocity_z": "(hit_z - z - (-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)) / max(1, ceil(distance / 3.0))"
+                },
+                {
+                  "type": "apoli:spawn_particles",
+                  "particle": {
+                    "type": "apoli:custom",
+                    "texture": "veneficus:textures/particle/bolt_glow.png",
+                    "lifetime": "max(1, ceil(distance / 3.0)) + 3",
+                    "size": 0.16,
+                    "end_size": 0.02,
+                    "stretch": 7.0,
+                    "facing": "velocity",
+                    "frames": 4,
+                    "frame_layout": "horizontal",
+                    "frame_time": 1,
+                    "loop_frames": true,
+                    "color": "#FFB43A",
+                    "end_color": "#FFB43A00",
+                    "friction": 0.86,
+                    "emissive": true,
+                    "blend": "additive",
+                    "physics": false,
+                    "alpha_bleed": true,
+                    "easing": "ease_in_quad"
+                  },
+                  "count": 1,
+                  "space": "world",
+                  "offset_x": "(-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)",
+                  "offset_y": "(eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)",
+                  "offset_z": "(-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)",
+                  "spread": 0.0,
+                  "velocity_x": "(hit_x - x - (-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)) / max(1, ceil(distance / 3.0))",
+                  "velocity_y": "(hit_y - y - (eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)) / max(1, ceil(distance / 3.0))",
+                  "velocity_z": "(hit_z - z - (-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)) / max(1, ceil(distance / 3.0))"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "else_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:text",
+            "bar": "actionbar",
+            "text": {
+              "translate": "veneficus.hud.recharging",
+              "with": [
+                {
+                  "translate": "power.veneficus.wizard/bombarda.name",
+                  "color": "#B8B0A0"
+                }
+              ],
+              "color": "gray"
+            },
+            "fadein": 2,
+            "duration": 30,
+            "fadeout": 10
+          },
+          {
+            "type": "apoli:play_sound",
+            "sound": "minecraft:block.note_block.hat",
+            "volume": 0.3,
+            "pitch": 0.7
+          }
+        ]
+      }
+    }
+  },
+  "bind": {
+    "type": "apoli:action_on_callback",
+    "entity_action_gained": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:all_of",
+        "conditions": [
+          {
+            "type": "apoli:resource",
+            "resource": "veneficus:wizard/spellbook_loadout",
+            "comparison": "==",
+            "compare_to": 14,
+            "inverted": true
+          },
+          {
+            "type": "apoli:resource",
+            "resource": "veneficus:wizard/spellbook_loadout",
+            "comparison": "==",
+            "compare_to": 0
+          }
+        ]
+      },
+      "if_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:modify_resource",
+            "resource": "veneficus:wizard/spellbook_loadout",
+            "modifier": {
+              "operation": "set_base",
+              "value": 14
+            },
+            "position": "resource_index_of(veneficus:wizard/spellbook_loadout, 0)"
+          },
+          {
+            "type": "apoli:text",
+            "bar": "actionbar",
+            "fadein": 4,
+            "duration": 60,
+            "fadeout": 15,
+            "text": [
+              {
+                "text": {
+                  "translate": "veneficus.hud.learned",
+                  "with": [
+                    {
+                      "translate": "power.veneficus.wizard/bombarda.name",
+                      "color": "#FFB43A"
+                    }
+                  ],
+                  "color": "#E8DCC0"
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 14,
+                  "position": 0
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 14,
+                  "position": 1
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 14,
+                  "position": 2
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 14,
+                  "position": 3
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 14,
+                  "position": 4
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 14,
+                  "position": 5
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 14,
+                  "position": 6
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 14,
+                  "position": 7
+                }
+              }
+            ]
+          },
+          {
+            "type": "apoli:play_sound",
+            "sound": "minecraft:block.enchantment_table.use",
+            "volume": 0.8,
+            "pitch": 1.2
+          }
+        ]
+      }
+    },
+    "entity_action_lost": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:resource",
+        "resource": "veneficus:wizard/spellbook_loadout",
+        "comparison": "==",
+        "compare_to": 14
+      },
+      "if_action": {
+        "type": "apoli:modify_resource",
+        "resource": "veneficus:wizard/spellbook_loadout",
+        "modifier": {
+          "operation": "set_base",
+          "value": 0
+        },
+        "position": "resource_index_of(veneficus:wizard/spellbook_loadout, 14)"
+      }
+    }
+  },
+  "incantation": {
+    "type": "apoli:action_on_speech",
+    "messages": [
+      "bombarda",
+      "bombard a",
+      "bombarder",
+      "bombarda maxima"
+    ],
+    "tolerance": 0.25,
+    "condition": {
+      "type": "apoli:power",
+      "power": "veneficus:wand/focus"
+    },
+    "entity_action": {
+      "type": "apoli:run_function",
+      "function": "veneficus:wizard/bombarda_cast"
+    }
+  }
+}

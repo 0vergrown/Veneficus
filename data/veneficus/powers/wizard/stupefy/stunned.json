@@ -1,0 +1,103 @@
+{
+  "type": "apoli:multiple",
+  "out": {
+    "type": "apoli:prevent_key_press",
+    "unpress": true
+  },
+  "stare": {
+    "type": "apoli:modify_cursor_speed",
+    "modifier": {
+      "operation": "set_total",
+      "value": 0
+    }
+  },
+  "down": {
+    "type": "apoli:pose",
+    "entity_pose": "sleeping",
+    "priority": 10
+  },
+  "fade": {
+    "type": "apoli:cooldown",
+    "cooldown": 80,
+    "persistent": false
+  },
+  "start": {
+    "type": "apoli:action_on_callback",
+    "entity_action_gained": {
+      "type": "apoli:modify_resource",
+      "resource": "veneficus:wizard/stupefy/stunned_fade",
+      "modifier": {
+        "operation": "set_base",
+        "value": 50
+      }
+    }
+  },
+  "still": {
+    "type": "apoli:action_on_callback",
+    "entity_action_gained": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:entity_type",
+        "entity_type": "minecraft:player",
+        "inverted": true
+      },
+      "if_action": {
+        "type": "apoli:modify_entity_data",
+        "data": "no_ai",
+        "value": true
+      }
+    },
+    "entity_action_lost": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:entity_type",
+        "entity_type": "minecraft:player",
+        "inverted": true
+      },
+      "if_action": {
+        "type": "apoli:modify_entity_data",
+        "data": "no_ai",
+        "value": false
+      }
+    }
+  },
+  "dark": {
+    "type": "apoli:overlay",
+    "texture": "veneficus:textures/overlay/wizard/stupefy/blackout.png",
+    "strength": "min(0.94, veneficus:wizard/stupefy/stunned_fade / 12)",
+    "draw_phase": "below_hud",
+    "hide_with_hud": false,
+    "visible_in_third_person": true
+  },
+  "stars": {
+    "type": "apoli:particle",
+    "particle": {
+      "type": "apoli:custom",
+      "texture": "veneficus:textures/particle/glint.png",
+      "lifetime": 10,
+      "lifetime_variation": 6,
+      "size": 0.09,
+      "size_variation": 0.06,
+      "end_size": 0.0,
+      "color": "#FFFFFF",
+      "end_color": "#FF607000",
+      "friction": 0.9,
+      "frames": 4,
+      "frame_layout": "horizontal",
+      "emissive": true,
+      "blend": "additive",
+      "physics": false,
+      "alpha_bleed": true,
+      "roll": "rUni(0, 360)"
+    },
+    "count": 1,
+    "frequency": 4,
+    "offset_y": 0.3,
+    "spread": {
+      "x": 0.5,
+      "y": 0.1,
+      "z": 0.5
+    }
+  },
+  "hidden": true
+}

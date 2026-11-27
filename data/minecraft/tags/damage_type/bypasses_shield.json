@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "veneficus:wizard/spell",
+    "veneficus:wizard/killing_curse",
+    "veneficus:wizard/cruciatus"
+  ]
+}

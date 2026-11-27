@@ -1,0 +1,23 @@
+{
+  "name": {
+    "translate": "skill_tree.veneficus.spellbook.name"
+  },
+  "description": {
+    "translate": "skill_tree.veneficus.spellbook.description"
+  },
+  "icon": {
+    "texture": "veneficus:textures/gui/skill/spellbook.png"
+  },
+  "frame": "goal",
+  "background": "veneficus:textures/gui/skill/background.png",
+  "default_powers": [
+    "veneficus:wizard/practice"
+  ],
+  "order": 20,
+  "condition": {
+    "type": "origins:origin",
+    "layer": "origins-classes:class",
+    "origin": "veneficus:wizard"
+  },
+  "refundable": true
+}

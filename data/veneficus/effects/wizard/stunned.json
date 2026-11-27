@@ -1,0 +1,9 @@
+{
+  "type": "harmful",
+  "powers": [
+    "veneficus:wizard/stupefy/stunned"
+  ],
+  "r": 0.91,
+  "g": 0.06,
+  "b": 0.16
+}

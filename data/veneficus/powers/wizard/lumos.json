@@ -1,0 +1,787 @@
+{
+  "type": "apoli:multiple",
+  "skill": {
+    "parent": "veneficus:spellbook/utility",
+    "icon": {
+      "texture": "veneficus:textures/gui/wizard/lumos.png"
+    },
+    "cost": 0,
+    "frame": "task",
+    "order": 0,
+    "condition": {
+      "type": "apoli:resource",
+      "resource": "veneficus:wizard/spellbook_loadout",
+      "comparison": "==",
+      "compare_to": 0
+    }
+  },
+  "cast": {
+    "type": "apoli:function",
+    "entity_action": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:resource",
+        "resource": "veneficus:wizard/spellbook_ready",
+        "comparison": "<=",
+        "compare_to": "world_time",
+        "position": 2
+      },
+      "if_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:modify_resource",
+            "resource": "veneficus:wizard/spellbook_ready",
+            "modifier": {
+              "operation": "set_base",
+              "value": "world_time + 10"
+            },
+            "position": 2
+          },
+          {
+            "type": "apoli:modify_resource",
+            "resource": "veneficus:wizard/spellbook_recharge",
+            "modifier": {
+              "operation": "set_base",
+              "value": 10
+            },
+            "position": 2
+          },
+          {
+            "type": "apoli:trigger_cooldown",
+            "power": "veneficus:wizard/spellbook_flourish"
+          },
+          {
+            "type": "apoli:swing_hand",
+            "hand": "main_hand"
+          },
+          {
+            "type": "apoli:text",
+            "bar": "actionbar",
+            "text": {
+              "translate": "veneficus.cast.lumos",
+              "color": "#CFE8FF"
+            },
+            "fadein": 2,
+            "duration": 30,
+            "fadeout": 10
+          },
+          {
+            "type": "apoli:play_sound",
+            "sound": "minecraft:block.amethyst_block.resonate",
+            "volume": 0.8,
+            "pitch": 1.6
+          },
+          {
+            "type": "apoli:spawn_particles",
+            "particle": {
+              "type": "apoli:custom",
+              "texture": "veneficus:textures/particle/burst.png",
+              "lifetime": 4,
+              "size": 0.22,
+              "end_size": 0.35200000000000004,
+              "color": "#FFFFFF",
+              "end_color": "#9FD4FF00",
+              "frames": 4,
+              "frame_layout": "horizontal",
+              "emissive": true,
+              "blend": "additive",
+              "physics": false,
+              "alpha_bleed": true,
+              "easing": "ease_out_quad",
+              "roll": "rUni(0, 360)"
+            },
+            "count": 1,
+            "space": "world",
+            "offset_x": "(-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)",
+            "offset_y": "(eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)",
+            "offset_z": "(-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)",
+            "spread": 0.0,
+            "speed": 0.0
+          },
+          {
+            "type": "apoli:if_else",
+            "condition": {
+              "type": "apoli:resource",
+              "resource": "veneficus:wizard/lumos_lit",
+              "comparison": "==",
+              "compare_to": 1
+            },
+            "if_action": {
+              "type": "apoli:and",
+              "actions": [
+                {
+                  "type": "apoli:modify_resource",
+                  "resource": "veneficus:wizard/lumos_lit",
+                  "modifier": {
+                    "operation": "set_base",
+                    "value": 0
+                  }
+                },
+                {
+                  "type": "apoli:play_sound",
+                  "sound": "minecraft:block.candle.extinguish",
+                  "volume": 1.0,
+                  "pitch": 1.2
+                },
+                {
+                  "type": "apoli:spawn_particles",
+                  "particle": "minecraft:smoke",
+                  "count": 4,
+                  "space": "world",
+                  "offset_x": "(-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)",
+                  "offset_y": "(eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)",
+                  "offset_z": "(-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)",
+                  "spread": 0.03,
+                  "speed": 0.01
+                }
+              ]
+            },
+            "else_action": {
+              "type": "apoli:and",
+              "actions": [
+                {
+                  "type": "apoli:modify_resource",
+                  "resource": "veneficus:wizard/lumos_lit",
+                  "modifier": {
+                    "operation": "set_base",
+                    "value": 1
+                  }
+                },
+                {
+                  "type": "apoli:trigger_cooldown",
+                  "power": "veneficus:wizard/lumos_pulse"
+                },
+                {
+                  "type": "apoli:play_sound",
+                  "sound": "minecraft:block.amethyst_block.resonate",
+                  "volume": 1.0,
+                  "pitch": 1.8
+                },
+                {
+                  "type": "apoli:spawn_particles",
+                  "particle": {
+                    "type": "apoli:custom",
+                    "texture": "veneficus:textures/particle/glint.png",
+                    "lifetime": 14,
+                    "lifetime_variation": 6,
+                    "size": 0.3,
+                    "size_variation": 0.06,
+                    "end_size": 0.0,
+                    "color": "#FFFFFF",
+                    "end_color": "#BFE4FF00",
+                    "friction": 0.9,
+                    "frames": 4,
+                    "frame_layout": "horizontal",
+                    "emissive": true,
+                    "blend": "additive",
+                    "physics": false,
+                    "alpha_bleed": true,
+                    "roll": "rUni(0, 360)"
+                  },
+                  "count": 6,
+                  "space": "world",
+                  "offset_x": "(-0.3 * cos(rad(yaw)) + -0.33 * (-sin(rad(pitch)) * sin(rad(yaw))) + 1.45 * look_x)",
+                  "offset_y": "(eye_y - y + -0.33 * cos(rad(pitch)) + 1.45 * look_y)",
+                  "offset_z": "(-0.3 * sin(rad(yaw)) + -0.33 * (sin(rad(pitch)) * cos(rad(yaw))) + 1.45 * look_z)",
+                  "spread": 0.05,
+                  "speed": 0.03
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "else_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:text",
+            "bar": "actionbar",
+            "text": {
+              "translate": "veneficus.hud.recharging",
+              "with": [
+                {
+                  "translate": "power.veneficus.wizard/lumos.name",
+                  "color": "#B8B0A0"
+                }
+              ],
+              "color": "gray"
+            },
+            "fadein": 2,
+            "duration": 30,
+            "fadeout": 10
+          },
+          {
+            "type": "apoli:play_sound",
+            "sound": "minecraft:block.note_block.hat",
+            "volume": 0.3,
+            "pitch": 0.7
+          }
+        ]
+      }
+    }
+  },
+  "bind": {
+    "type": "apoli:action_on_callback",
+    "entity_action_gained": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:all_of",
+        "conditions": [
+          {
+            "type": "apoli:resource",
+            "resource": "veneficus:wizard/spellbook_loadout",
+            "comparison": "==",
+            "compare_to": 2,
+            "inverted": true
+          },
+          {
+            "type": "apoli:resource",
+            "resource": "veneficus:wizard/spellbook_loadout",
+            "comparison": "==",
+            "compare_to": 0
+          }
+        ]
+      },
+      "if_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:modify_resource",
+            "resource": "veneficus:wizard/spellbook_loadout",
+            "modifier": {
+              "operation": "set_base",
+              "value": 2
+            },
+            "position": "resource_index_of(veneficus:wizard/spellbook_loadout, 0)"
+          },
+          {
+            "type": "apoli:text",
+            "bar": "actionbar",
+            "fadein": 4,
+            "duration": 60,
+            "fadeout": 15,
+            "text": [
+              {
+                "text": {
+                  "translate": "veneficus.hud.learned",
+                  "with": [
+                    {
+                      "translate": "power.veneficus.wizard/lumos.name",
+                      "color": "#CFE8FF"
+                    }
+                  ],
+                  "color": "#E8DCC0"
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 2,
+                  "position": 0
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 2,
+                  "position": 1
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 2,
+                  "position": 2
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 2,
+                  "position": 3
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 2,
+                  "position": 4
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 2,
+                  "position": 5
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.left",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 2,
+                  "position": 6
+                }
+              },
+              {
+                "text": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    },
+                    {
+                      "text": " "
+                    },
+                    {
+                      "translate": "veneficus.rune.right",
+                      "color": "#FFFFFF"
+                    }
+                  ]
+                },
+                "condition": {
+                  "type": "apoli:resource",
+                  "resource": "veneficus:wizard/spellbook_loadout",
+                  "comparison": "==",
+                  "compare_to": 2,
+                  "position": 7
+                }
+              }
+            ]
+          },
+          {
+            "type": "apoli:play_sound",
+            "sound": "minecraft:block.enchantment_table.use",
+            "volume": 0.8,
+            "pitch": 1.2
+          }
+        ]
+      }
+    },
+    "entity_action_lost": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:resource",
+        "resource": "veneficus:wizard/spellbook_loadout",
+        "comparison": "==",
+        "compare_to": 2
+      },
+      "if_action": {
+        "type": "apoli:modify_resource",
+        "resource": "veneficus:wizard/spellbook_loadout",
+        "modifier": {
+          "operation": "set_base",
+          "value": 0
+        },
+        "position": "resource_index_of(veneficus:wizard/spellbook_loadout, 2)"
+      }
+    }
+  },
+  "incantation": {
+    "type": "apoli:action_on_speech",
+    "messages": [
+      "lumos",
+      "loomos",
+      "lumos maxima"
+    ],
+    "tolerance": 0.25,
+    "condition": {
+      "type": "apoli:all_of",
+      "conditions": [
+        {
+          "type": "apoli:power",
+          "power": "veneficus:wand/focus"
+        },
+        {
+          "type": "apoli:resource",
+          "resource": "veneficus:wizard/lumos_lit",
+          "comparison": "==",
+          "compare_to": 0
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "apoli:run_function",
+      "function": "veneficus:wizard/lumos_cast"
+    }
+  },
+  "lit": {
+    "type": "apoli:resource",
+    "min": 0,
+    "max": 1,
+    "start_value": 0
+  },
+  "pulse": {
+    "type": "apoli:cooldown",
+    "cooldown": 4,
+    "persistent": false,
+    "min_action": {
+      "type": "apoli:if_else",
+      "condition": {
+        "type": "apoli:all_of",
+        "conditions": [
+          {
+            "type": "apoli:resource",
+            "resource": "veneficus:wizard/lumos_lit",
+            "comparison": "==",
+            "compare_to": 1
+          },
+          {
+            "type": "apoli:power",
+            "power": "veneficus:wand/focus"
+          }
+        ]
+      },
+      "if_action": {
+        "type": "apoli:and",
+        "actions": [
+          {
+            "type": "apoli:block_action_at",
+            "block_action": {
+              "type": "apoli:offset",
+              "y": 1,
+              "action": {
+                "type": "apoli:if_else",
+                "condition": {
+                  "type": "apoli:any_of",
+                  "conditions": [
+                    {
+                      "type": "apoli:block",
+                      "block": "minecraft:air"
+                    },
+                    {
+                      "type": "apoli:block",
+                      "block": "minecraft:cave_air"
+                    },
+                    {
+                      "type": "apoli:block",
+                      "block": "minecraft:light"
+                    }
+                  ]
+                },
+                "if_action": {
+                  "type": "apoli:ghost_block",
+                  "block": "minecraft:light",
+                  "duration": 8
+                }
+              }
+            }
+          },
+          {
+            "type": "apoli:trigger_cooldown",
+            "power": "veneficus:wizard/lumos_pulse"
+          }
+        ]
+      }
+    }
+  },
+  "glow": {
+    "type": "apoli:emissive",
+    "luminance": 14,
+    "self_lit": false,
+    "condition": {
+      "type": "apoli:all_of",
+      "conditions": [
+        {
+          "type": "apoli:resource",
+          "resource": "veneficus:wizard/lumos_lit",
+          "comparison": "==",
+          "compare_to": 1
+        },
+        {
+          "type": "apoli:power",
+          "power": "veneficus:wand/focus"
+        }
+      ]
+    }
+  },
+  "tip": {
+    "type": "apoli:particle",
+    "particle": {
+      "type": "apoli:custom",
+      "texture": "veneficus:textures/particle/mote.png",
+      "lifetime": 6,
+      "lifetime_variation": 6,
+      "size": 0.09,
+      "size_variation": 0.03,
+      "end_size": 0.0,
+      "color": "#CFE8FF",
+      "end_color": "#CFE8FF00",
+      "friction": 0.92,
+      "gravity": -0.003,
+      "emissive": true,
+      "blend": "additive",
+      "physics": false,
+      "alpha_bleed": true
+    },
+    "count": 1,
+    "frequency": 2,
+    "model_part": "main_hand",
+    "offset_x": 0,
+    "offset_y": -0.8,
+    "offset_z": 0,
+    "spread": 0.02,
+    "visible_in_first_person": true,
+    "condition": {
+      "type": "apoli:all_of",
+      "conditions": [
+        {
+          "type": "apoli:resource",
+          "resource": "veneficus:wizard/lumos_lit",
+          "comparison": "==",
+          "compare_to": 1
+        },
+        {
+          "type": "apoli:power",
+          "power": "veneficus:wand/focus"
+        }
+      ]
+    }
+  },
+  "hold": {
+    "type": "apoli:modify_model_parts",
+    "condition": {
+      "type": "apoli:all_of",
+      "conditions": [
+        {
+          "type": "apoli:resource",
+          "resource": "veneficus:wizard/lumos_lit",
+          "comparison": "==",
+          "compare_to": 1
+        },
+        {
+          "type": "apoli:power",
+          "power": "veneficus:wand/focus"
+        },
+        {
+          "type": "apoli:resource",
+          "resource": "veneficus:wizard/spellbook_flourish",
+          "comparison": "==",
+          "compare_to": 0
+        }
+      ]
+    },
+    "transformations": [
+      {
+        "model_part": "right_arm",
+        "type": "pitch",
+        "value": "rad(-72) + rad(pitch) * 0.6",
+        "duration": 6,
+        "fade_out_duration": 6,
+        "easing": "ease_out_quad"
+      }
+    ]
+  },
+  "nox": {
+    "type": "apoli:action_on_speech",
+    "messages": [
+      "nox",
+      "knox",
+      "knocks"
+    ],
+    "tolerance": 0.2,
+    "condition": {
+      "type": "apoli:all_of",
+      "conditions": [
+        {
+          "type": "apoli:power",
+          "power": "veneficus:wand/focus"
+        },
+        {
+          "type": "apoli:resource",
+          "resource": "veneficus:wizard/lumos_lit",
+          "comparison": "==",
+          "compare_to": 1
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "apoli:run_function",
+      "function": "veneficus:wizard/lumos_cast"
+    }
+  }
+}

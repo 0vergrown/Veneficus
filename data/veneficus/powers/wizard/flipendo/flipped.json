@@ -1,0 +1,27 @@
+{
+  "type": "apoli:modify_model_parts",
+  "transformations": [
+    {
+      "model_part": "whole",
+      "type": "pitch",
+      "pivot": [
+        0,
+        12,
+        0
+      ],
+      "fade_out_duration": 1,
+      "keyframes": [
+        {
+          "time": 0,
+          "value": 0
+        },
+        {
+          "time": 12,
+          "value": -6.2832,
+          "easing": "ease_out_quad"
+        }
+      ]
+    }
+  ],
+  "hidden": true
+}

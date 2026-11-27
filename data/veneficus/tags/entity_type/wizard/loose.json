@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:item",
+    "minecraft:experience_orb",
+    "minecraft:arrow",
+    "minecraft:spectral_arrow",
+    "minecraft:trident",
+    "minecraft:snowball",
+    "minecraft:egg",
+    "minecraft:ender_pearl",
+    "minecraft:potion",
+    "minecraft:experience_bottle",
+    "minecraft:firework_rocket",
+    "minecraft:falling_block",
+    "minecraft:tnt",
+    "minecraft:small_fireball",
+    "minecraft:fireball",
+    "minecraft:dragon_fireball",
+    "minecraft:wither_skull",
+    "minecraft:shulker_bullet",
+    "minecraft:llama_spit",
+    {
+      "id": "minecraft:wind_charge",
+      "required": false
+    },
+    {
+      "id": "minecraft:breeze_wind_charge",
+      "required": false
+    }
+  ]
+}

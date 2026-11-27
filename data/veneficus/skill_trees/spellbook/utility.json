@@ -1,0 +1,14 @@
+{
+  "parent": "veneficus:spellbook/charms",
+  "name": {
+    "translate": "skill.veneficus.spellbook/utility.name"
+  },
+  "description": {
+    "translate": "skill.veneficus.spellbook/utility.description"
+  },
+  "icon": {
+    "texture": "veneficus:textures/gui/skill/utility.png"
+  },
+  "frame": "goal",
+  "order": 0
+}

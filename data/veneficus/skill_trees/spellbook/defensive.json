@@ -1,0 +1,14 @@
+{
+  "parent": "veneficus:spellbook/charms",
+  "name": {
+    "translate": "skill.veneficus.spellbook/defensive.name"
+  },
+  "description": {
+    "translate": "skill.veneficus.spellbook/defensive.description"
+  },
+  "icon": {
+    "texture": "veneficus:textures/gui/skill/defensive.png"
+  },
+  "frame": "goal",
+  "order": 1
+}

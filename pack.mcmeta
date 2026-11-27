@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "description": "Veneficus: wands and spells for the Origins Classes layer. Load it as a data pack and as a resource pack.",
+    "pack_format": 15,
+    "supported_formats": {
+      "min_inclusive": 15,
+      "max_inclusive": 48
+    }
+  }
+}

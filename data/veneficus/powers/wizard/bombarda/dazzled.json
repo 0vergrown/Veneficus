@@ -1,0 +1,24 @@
+{
+  "type": "apoli:multiple",
+  "flash": {
+    "type": "apoli:cooldown",
+    "cooldown": 30,
+    "persistent": false
+  },
+  "start": {
+    "type": "apoli:action_on_callback",
+    "entity_action_gained": {
+      "type": "apoli:trigger_cooldown",
+      "power": "veneficus:wizard/bombarda/dazzled_flash"
+    }
+  },
+  "white": {
+    "type": "apoli:overlay",
+    "texture": "veneficus:textures/overlay/wizard/bombarda/flash.png",
+    "strength": "veneficus:wizard/bombarda/dazzled_flash / 30",
+    "draw_phase": "below_hud",
+    "hide_with_hud": false,
+    "visible_in_third_person": true
+  },
+  "hidden": true
+}
